@@ -180,5 +180,54 @@ function nextQuestion() {
 
 }
 
+// Exibe a tela final
+function showSucccessMessage() {
+
+    hideOrShowQuizz();
+
+    // trocar dados da tela de sucesso
+
+    // calcular o score
+    const score = ((points / questions.length) * 100).toFixed(2);
+
+    const displayScore = document.querySelector("#display-score span");
+
+    displayScore.textContent = score.toString();
+
+    // alterar o número de perguntas corretas
+    const correctAnswers = document.querySelector("#correct-answers");
+    correctAnswers.textContent = points;
+
+    // alterar o total de perguntas
+    const totalQuestions = document.querySelector("#questions-qty");
+    totalQuestions.textContent = questions.length;
+
+    //Mensagem caso o usuário não acerte nenhuma alternativa
+    if (displayScore.textContent == 0) {
+        const congratulationMessage = document.querySelector("h2");
+        congratulationMessage.textContent = "Não foi dessa vez";
+    }
+
+}
+
+// Mostra ou esconde o score
+function hideOrShowQuizz() {
+    quizzContainer.classList.toggle("hide");
+    scoreContainer.classList.toggle("hide");
+}
+
+// Reiniciar Quizz
+const restartBtn = document.querySelector("#restart");
+
+restartBtn.addEventListener("click", function() {
+
+    // zerar o jogo
+    actualQuestion = 0;
+    points = 0;
+    hideOrShowQuizz();
+    init();
+
+});
+
 //Inicialização do Quizz
 init();
